@@ -48,7 +48,6 @@ public class carDescription extends javax.swing.JPanel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-         
     }
     
     
