@@ -42,6 +42,7 @@ public class carDescription extends javax.swing.JPanel {
             int panelHeight = 71;
             Image resizedImage = originalImage.getScaledInstance(panelWidth, panelHeight, Image.SCALE_SMOOTH);
 
+            
             // Set the resized image to imagePanel
             ImageIcon resizedIcon = new ImageIcon(resizedImage);
             imagePanel.setIcon(resizedIcon);
