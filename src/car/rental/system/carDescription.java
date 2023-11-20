@@ -36,13 +36,10 @@ public class carDescription extends javax.swing.JPanel {
             byte[] imageBytes = blob.getBytes(1, (int) blob.length());
             ImageIcon originalIcon = new ImageIcon(imageBytes);
             Image originalImage = originalIcon.getImage();
-
             // Resize the image to fit inside imagePanel
             int panelWidth = 167;
             int panelHeight = 71;
             Image resizedImage = originalImage.getScaledInstance(panelWidth, panelHeight, Image.SCALE_SMOOTH);
-
-            
             // Set the resized image to imagePanel
             ImageIcon resizedIcon = new ImageIcon(resizedImage);
             imagePanel.setIcon(resizedIcon);
