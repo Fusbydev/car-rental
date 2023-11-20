@@ -20,18 +20,38 @@ import javax.swing.ImageIcon;
 public class carDescription extends javax.swing.JPanel {
     private int carID = 0;
     private int availability  = 0;
+    private String model;
+    private int capacity;
+    private String color;
+    private String plateNumber;
     addCar AC = new addCar();
+    
+    
     /** Creates new form carDescription
      * @param price
      * @param idcar 
      * @param availability*/
-    public carDescription(float price, int idcar, int availability, Blob blob) throws SQLException, FileNotFoundException, IOException {
+    
+    
+    public carDescription(float price, int idcar, int availability, Blob blob, String model, int capacity, String color, String plateNumber) 
+            throws SQLException, FileNotFoundException, IOException {
         initComponents();
+        
         this.carID = idcar;
         this.availability = availability;
+        this.color = color;
+        this.model = model;
+        this.capacity = capacity;
+        this.plateNumber = plateNumber;
         setMaximumSize(new Dimension(127, 165));
         setVisible(true);
+        
         jLabel2.setText("PHP: " + price + " / Day");
+        carMod.setText("Model: " + model);
+        carPlate.setText("Plate Number: " + plateNumber);
+        carColor.setText("Color: " + color);
+        carCap.setText("Capacity: " + capacity);
+        
          try {
             byte[] imageBytes = blob.getBytes(1, (int) blob.length());
             ImageIcon originalIcon = new ImageIcon(imageBytes);
@@ -48,8 +68,7 @@ public class carDescription extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
-    
+
 
     public int getCarID() {
         return carID;
@@ -68,17 +87,24 @@ public class carDescription extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         rent = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         activeStats = new javax.swing.JPanel();
         imagePanel = new javax.swing.JLabel();
+        carMod = new javax.swing.JLabel();
+        carPlate = new javax.swing.JLabel();
+        carColor = new javax.swing.JLabel();
+        carCap = new javax.swing.JLabel();
+
+        jLabel4.setText("Price");
 
         setBackground(new java.awt.Color(153, 153, 255));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, null));
 
-        jLabel2.setText("label and shits");
+        jLabel2.setText("Price");
 
         rent.setText("Rent");
         rent.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +135,14 @@ public class carDescription extends javax.swing.JPanel {
 
         imagePanel.setBackground(new java.awt.Color(204, 255, 255));
 
+        carMod.setText("Model");
+
+        carPlate.setText("Plate Number");
+
+        carColor.setText("Color");
+
+        carCap.setText("Capacity");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,27 +152,41 @@ public class carDescription extends javax.swing.JPanel {
                 .addComponent(activeStats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(rent, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
-                    .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rent, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2))
+                            .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(carMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(carPlate, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(carColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(carCap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(carMod)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(carPlate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(carColor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(carCap)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rent)
                     .addComponent(jButton2))
@@ -149,7 +197,6 @@ public class carDescription extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentActionPerformed
-
         rentalInterface RI = new rentalInterface(getCarID());
         RI.setVisible(true);
         
@@ -164,10 +211,15 @@ public class carDescription extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel activeStats;
+    public javax.swing.JLabel carCap;
+    public javax.swing.JLabel carColor;
+    public javax.swing.JLabel carMod;
+    public javax.swing.JLabel carPlate;
     private javax.swing.JLabel imagePanel;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel4;
     public javax.swing.JButton rent;
     // End of variables declaration//GEN-END:variables
 

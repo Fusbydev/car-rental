@@ -51,8 +51,8 @@ public class mainPage extends javax.swing.JFrame {
                 String plateNumber = rs.getString(5);
                 availability = rs.getInt(6);
                 Blob imageIcon = rs.getBlob(7);
-                //System.out.println(availability);
-                CD = new carDescription(price, id, availability, (com.mysql.cj.jdbc.Blob) imageIcon);
+                int capacity = rs.getInt(8);
+                CD = new carDescription(price, id, availability, (com.mysql.cj.jdbc.Blob) imageIcon, model, capacity, color, plateNumber);
                 CD.changeActive(availability);
                 availableCars.add(CD);
             }
@@ -169,8 +169,9 @@ public class mainPage extends javax.swing.JFrame {
                 String plateNumber = rs.getString(5);
                 availability = rs.getInt(6);
                 Blob imageIcon = rs.getBlob(7);
+                int capacity = rs.getInt(8);
                 //System.out.println(availability);
-                CD = new carDescription(price, id, availability, (com.mysql.cj.jdbc.Blob) imageIcon);
+                CD = new carDescription(price, id, availability, (com.mysql.cj.jdbc.Blob) imageIcon, model, capacity, color, plateNumber);
                 CD.changeActive(availability);
                 availableCars.add(CD);
             }
@@ -185,6 +186,7 @@ public class mainPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       new addCar().setVisible(true);
+      dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
