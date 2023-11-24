@@ -11,6 +11,8 @@ import java.awt.Image;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -58,8 +60,8 @@ public class carDescription extends javax.swing.JPanel {
             Image originalImage = originalIcon.getImage();
             
             // Resize the image to fit inside imagePanel1
-            int panelWidth = 167;
-            int panelHeight = 71;
+            int panelWidth = 122;
+            int panelHeight = 60;
             Image resizedImage = originalImage.getScaledInstance(panelWidth, panelHeight, Image.SCALE_SMOOTH);
             // Set the resized image to imagePanel
             ImageIcon resizedIcon = new ImageIcon(resizedImage);
@@ -209,6 +211,11 @@ public class carDescription extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
+        try {
+            new carHistory1(plateNumber).setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(carDescription.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void rentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentActionPerformed
@@ -231,7 +238,7 @@ public class carDescription extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel4;
-    private javax.swing.JButton rent;
+    public javax.swing.JButton rent;
     // End of variables declaration//GEN-END:variables
 
 }

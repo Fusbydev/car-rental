@@ -34,18 +34,27 @@ public class mainPage extends javax.swing.JFrame {
     String password = "password";
     
     public void cars() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String query;
-            if (jCheckBox1.isSelected()) {
-                query = "SELECT * FROM cars WHERE availability = 1";
-            } else {
-                query = "SELECT * FROM cars";
-            }
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        String query;
 
-            try (Connection con = DriverManager.getConnection(url, username, password);
-                 PreparedStatement st = con.prepareStatement(query);
-                 ResultSet rs = st.executeQuery()) {
+        if (jCheckBox1.isSelected()) {
+            query = "SELECT * FROM cars WHERE availability = 1";
+        } else {
+            query = "SELECT * FROM cars WHERE 1 = 1"; // Base query when no specific filter is selected
+        }
+
+        if (seater4.isSelected()) {
+            query += " AND capacity = 4";
+        }
+
+        if (seater59.isSelected()) {
+            query += " AND capacity BETWEEN 5 AND 1000";
+        }
+
+        try (Connection con = DriverManager.getConnection(url, username, password);
+             PreparedStatement st = con.prepareStatement(query);
+             ResultSet rs = st.executeQuery()) {
 
                 carPanel = new JPanel(); // Create a new panel for cars
                 carPanel.setLayout(new GridLayout(0, 3, 10, 10)); // Set layout for car panel with 3 columns
@@ -84,7 +93,7 @@ public class mainPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox3 = new javax.swing.JCheckBox();
+        seater59 = new javax.swing.JCheckBox();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         carPanel = new javax.swing.JPanel();
@@ -94,17 +103,27 @@ public class mainPage extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        seater4 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jCheckBox3.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jCheckBox3.setText("5 to 9 Seaters");
+        seater59.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        seater59.setText("5 to 9 Seaters");
+        seater59.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seater59ActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(0, 0, 128));
         jButton5.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Filter");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         carPanel.setBackground(new java.awt.Color(255, 255, 255));
         carPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -137,7 +156,8 @@ public class mainPage extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(0, 0, 128));
         jButton3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 24)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("History");
+        jButton3.setText("Manage Transactions");
+        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 128));
         jButton2.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 24)); // NOI18N
@@ -147,7 +167,7 @@ public class mainPage extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(0, 0, 128));
         jButton1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add Car");
+        jButton1.setText("Manage Cars");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -157,13 +177,13 @@ public class mainPage extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(0, 0, 128));
         jButton4.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 24)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Edit");
+        jButton4.setText("History");
 
-        jCheckBox2.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jCheckBox2.setText("4 Seaters");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        seater4.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        seater4.setText("4 Seaters");
+        seater4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                seater4ActionPerformed(evt);
             }
         });
 
@@ -184,9 +204,9 @@ public class mainPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jCheckBox1)
                         .addGap(67, 67, 67)
-                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(seater4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(seater59, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -210,8 +230,8 @@ public class mainPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox3)
+                            .addComponent(seater4)
+                            .addComponent(seater59)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -223,17 +243,26 @@ public class mainPage extends javax.swing.JFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
 
-        cars();
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new addCar().setVisible(true);
         dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void seater4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seater4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    }//GEN-LAST:event_seater4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        cars();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void seater59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seater59ActionPerformed
+
+    }//GEN-LAST:event_seater59ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -244,9 +273,9 @@ public class mainPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JCheckBox seater4;
+    private javax.swing.JCheckBox seater59;
     // End of variables declaration//GEN-END:variables
 }
